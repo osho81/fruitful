@@ -232,6 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const notValid = [6, 7, 14, 15, 22, 23, 30, 31, 38, 39, 46, 47, 54, 55];
             if (notValid.includes(i)) continue;
 
+
             //if every rowOfThree-item equals decideImage (i.e. first square's Image) & is not blank...
             //(every() vs map(): https://stackoverflow.com/questions/7340893/what-is-the-difference-between-map-every-and-foreach ) 
             if (rowOfThree.every(item => squares[item].style.backgroundImage === decidedImage && !isBlank)) {
@@ -307,5 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 });
+
+/////testing branch fruitfulSecond
 
 
