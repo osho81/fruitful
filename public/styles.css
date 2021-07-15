@@ -11,6 +11,28 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) inset, 0 1px 0 #fff;
 }
 
+.gridShaking {
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-3deg); }
+  20% { transform: translate(-3px, 0px) rotate(3deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(3deg); }
+  50% { transform: translate(-1px, 2px) rotate(-3deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-3deg); }
+  80% { transform: translate(-1px, -1px) rotate(3deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-3deg); }
+}
+
+.gridBack{
+  z-index: -1;
+}
+
 .grid div {
     height: 70px;
     width: 70px;
@@ -41,9 +63,9 @@ h3 {
   margin-top: -5px;
  }
 
-.invisible {
+/* .invisible {
     background-color: white;
-}
+} */
 
 body {
   /* background-image: url("candy-crush-background-2.png"); */
@@ -68,6 +90,12 @@ body {
   background-image: linear-gradient(#aeff96, #91e92d);
   box-shadow: 3px 3px rgba(0, 0, 0, 0.5) inset, 0 1px 0 #fff;
   color: #534d46;
+}
+
+.board-increase {
+  transform: scale(2);
+  transition-delay: 0.5s;
+  transition-duration: 2s;
 }
 
 
@@ -109,8 +137,22 @@ body {
   margin-left: -300px;
   margin-bottom: 200px;
   min-width: 300px;
-  min-height: 100px;
+  height: 40px;
+  overflow: hidden;
   padding: 0 5px 5px 10px;
   text-align: center;
-  box-shadow: 2px 2px rgba(0, 0, 0, 0.5) inset, 0 1px 0 #fff;
 }
+
+.instructions:hover {
+  color: #385f39;
+  margin-top: 350px;
+  margin-left: -300px;
+  margin-bottom: 200px;
+  min-width: 300px;
+  height: 230px;
+  padding: 0 5px 5px 10px;
+  text-align: center;
+}
+
+
+
