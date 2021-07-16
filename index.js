@@ -1,4 +1,3 @@
-//"load jsfile after html have been loaded": https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event 
 document.addEventListener('DOMContentLoaded', () => {
     const grid = document.querySelector('.grid');
     const scoreDisplay = document.getElementById('score');
@@ -16,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
         'url(../public/images/kiwi.png)'
     ];
 
-    //Audio (only in JS, without HTML)
     var startAudio = new Audio('../public/audio/start.mp3');
     var lowScoreAudio = new Audio('../public/audio/3found.mp3');
     var mediumScoreAudio = new Audio('../public/audio/4found.mp3');
@@ -25,26 +23,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     //create board and its squares 
-    //(styles.css defines number of possible squares in .grid)
     function board() {
         for (let i = 0; i < gridWidth * gridWidth; i++) {
-            //create div for every loop
             const square = document.createElement('div');
-            //make each square draggable,and assign it an id
+            //make each square draggable and assign an id
             square.setAttribute('draggable', true);
             square.setAttribute('id', i);
-
-            //assigning a random fruit-Image (0-5) for each square
-            //(Commented since don't want it to be assigned before play buttonis hit)
-            // let randomImage = Math.floor(Math.random() * fruitIcons.length);
-            // square.style.backgroundImage = fruitIcons[randomImage];
-
             grid.appendChild(square);
             squares.push(square);
         }
         scoreDisplay.innerHTML = score = 0;
     }
-
     board();
 
 
@@ -53,15 +42,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let draggedSquareId;
     let replacedSuareId;
 
-    //drag event: https://www.w3schools.com/jsref/event_ondrag.asp 
-    //add an eventlistener for each drag operation, for each related function
+    //add an eventlistener for each drag operation
     squares.forEach(square => square.addEventListener('dragstart', dragStart));
     squares.forEach(square => square.addEventListener('dragover', dragOver));
     squares.forEach(square => square.addEventListener('dragenter', dragEnter));
     squares.forEach(square => square.addEventListener('drageleave', dragLeave));
     squares.forEach(square => square.addEventListener('drop', dragDrop));
     squares.forEach(square => square.addEventListener('dragend', dragEnd));
-
 
     function dragStart() {
         draggedImage = this.style.backgroundImage;
@@ -71,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function dragOver(event) {
         event.preventDefault();
     }
-
 
     function dragEnter(event) {
         event.preventDefault();
@@ -90,10 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function dragEnd() {
-        //valid moves: 
-        //one step to left (-1), one up (-8 lands in the square above), 
-        //one to right (+1), & one step down (+8 lands in the square below), 
-        //and one step up-left, up-right, down-left, down-right. 
+        //valid moves: one (1) step to left, up, down, up-left, up-right, down-left, down-right. 
         let validMoves = [
             draggedSquareId - 1,
             draggedSquareId - gridWidth,
@@ -105,14 +88,14 @@ document.addEventListener('DOMContentLoaded', () => {
             draggedSquareId + (gridWidth + 1),
         ];
 
-        //valid move if above includes the square we want to replace/move to (not outside grid)
+        //valid move if above includes the square we want to replace/move to
         let validMove = validMoves.includes(replacedSuareId);
-
-        //if id exists & is a valid move >> clear the value of replaced.
+        
+        //if id exists & is a valid move, clear the value of replaced (and charge 5 points).
         if (replacedSuareId && validMove) {
             replacedSuareId = null;
-            scoreDisplay.innerHTML = score -= 5; //each move cost 5 points, enabling strategy
-            //but if id exist but not valid move >> give Images back
+            scoreDisplay.innerHTML = score -= 5;
+        //but if id exist but not valid move, keep fruit images as was
         } else if (replacedSuareId && !validMove) {
             squares[replacedSuareId].style.backgroundImage = replacedImage;
             squares[draggedSquareId].style.backgroundImage = draggedImage;
@@ -120,16 +103,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    //"move" filled squares downwards & fill first row randomly
+    //"move" filled squares downwards into empty squares
     function flowDownFilledSquares() {
-        // squares.forEach(item => item.style.backgroundColor = ''); 
         for (i = 0; i < 56; i++) {
-            //if any square is empty, "move down" the one above (that is not empty)
             if (squares[i + gridWidth].style.backgroundImage === '') {
                 squares[i + gridWidth].style.backgroundImage = squares[i].style.backgroundImage;
                 squares[i].style.backgroundImage = '';
             }
-            //Upper row fix
+            //Random fruits for empty upper row squares
             const firstRow = [0, 1, 2, 3, 4, 5, 6, 7]
             const isFirstRow = firstRow.includes(i)
             if (isFirstRow && (squares[i].style.backgroundImage === '')) {
@@ -139,25 +120,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         }
     }
-    // flowDownFilledSquares();
-
 
     //check matches of 5 squares in a row (last check is squares 59-63)
     function loopRowsOfFive() {
         for (i = 0; i < 60; i++) {
-            //arrays for each 4-square possibility row-wise
             let rowOfFive = [i, i + 1, i + 2, i + 3, i + 4];
-            //set Image for the first square in each 4-square-row
             let decidedImage = squares[i].style.backgroundImage;
-            const isBlank = squares[i].style.backgroundImage === ''; //if an empty spot
-
-            //to avoid matches covering 5 squares in two rows
+            const isBlank = squares[i].style.backgroundImage === ''; 
+            
+            //to avoid matches split into two rows:
             const notValid = [4, 5, 6, 7, 12, 13, 14, 15, 20, 21, 22, 23, 28, 29, 30, 31, 36, 37, 38, 39, 44, 45, 46, 47, 52, 53, 54, 55];
             if (notValid.includes(i)) continue;
 
-            //if every rowOfFive-item equals decideImage (i.e. first square's Image) & is not blank...
             if (rowOfFive.every(item => squares[item].style.backgroundImage === decidedImage && !isBlank)) {
-                //if found rowOfFive-match, increment score & give each square empty background
                 scoreDisplay.innerHTML = score += 25;
                 highScoreAudio.play();
                 rowOfFive.forEach(item => {
@@ -167,15 +142,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // loopRowsOfFive();
-
-
     //check matches of 5 squares column-wise (last check is squares 31/39/47/55/63)
     function loopColsOfFive() {
         for (i = 0; i < 32; i++) {
             let colOfFive = [i, i + gridWidth, i + (gridWidth * 2), i + (gridWidth * 3), i + (gridWidth * 4)];
             let decidedImage = squares[i].style.backgroundImage;
-            const isBlank = squares[i].style.backgroundImage === ''; //if an empty spot
+            const isBlank = squares[i].style.backgroundImage === ''; 
             if (colOfFive.every(item => squares[item].style.backgroundImage === decidedImage && !isBlank)) {
                 scoreDisplay.innerHTML = score += 25;
                 highScoreAudio.play();
@@ -186,26 +158,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // loopColsOfFive();
-
-
-
     //check matches of 4 squares in a row (last check is squares 60-63)
     function loopRowsOfFour() {
         for (i = 0; i < 61; i++) {
-            //arrays for each 4-square possibility row-wise
             let rowOfFour = [i, i + 1, i + 2, i + 3];
-            //set Image for the first square in each 4-square-row
             let decidedImage = squares[i].style.backgroundImage;
-            const isBlank = squares[i].style.backgroundImage === ''; //if an empty spot
-
-            //to avoid matches covering 4 squares in two rows
+            const isBlank = squares[i].style.backgroundImage === ''; 
             const notValid = [5, 6, 7, 13, 14, 15, 21, 22, 23, 29, 30, 31, 37, 38, 39, 45, 46, 47, 53, 54, 55];
             if (notValid.includes(i)) continue;
-
-            //if every rowOfFour-item equals decideImage (i.e. first square's Image) & is not blank...
             if (rowOfFour.every(item => squares[item].style.backgroundImage === decidedImage && !isBlank)) {
-                //if found rowOfFour-match, increment score & give each square empty background
                 scoreDisplay.innerHTML = score += 12;
                 mediumScoreAudio.play();
                 rowOfFour.forEach(item => {
@@ -215,15 +176,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // loopRowsOfFour();
-
-
     //check matches of 4 squares column-wise (last check is squares 39/47/55/63)
     function loopColsOfFour() {
         for (i = 0; i < 40; i++) {
             let colOfFour = [i, i + gridWidth, i + (gridWidth * 2), i + (gridWidth * 3)];
             let decidedImage = squares[i].style.backgroundImage;
-            const isBlank = squares[i].style.backgroundImage === ''; //if an empty spot
+            const isBlank = squares[i].style.backgroundImage === ''; 
             if (colOfFour.every(item => squares[item].style.backgroundImage === decidedImage && !isBlank)) {
                 scoreDisplay.innerHTML = score += 12;
                 mediumScoreAudio.play();
@@ -234,27 +192,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // loopColsOfFour();
-
-
-
     //check matches of 3 in a row (last possible 3-squares-match is at 61-63)
     function loopRowsOfThree() {
         for (i = 0; i < 62; i++) {
-            //arrays for each 3-square possibility row-wise
             let rowOfThree = [i, i + 1, i + 2];
-            //set Image for the first square in each 3-square-row
             let decidedImage = squares[i].style.backgroundImage;
-            const isBlank = squares[i].style.backgroundImage === ''; //if an empty spot
-
-            //to avoid matches covering 3 squares in two rows
+            const isBlank = squares[i].style.backgroundImage === ''; 
             const notValid = [6, 7, 14, 15, 22, 23, 30, 31, 38, 39, 46, 47, 54, 55];
             if (notValid.includes(i)) continue;
-
-            //if every rowOfThree-item equals decideImage (i.e. first square's Image) & is not blank...
-            //(every() vs map(): https://stackoverflow.com/questions/7340893/what-is-the-difference-between-map-every-and-foreach ) 
             if (rowOfThree.every(item => squares[item].style.backgroundImage === decidedImage && !isBlank)) {
-                //if found rowOfThree-match, increment scores & give each square empty background
                 scoreDisplay.innerHTML = score += 3;
                 lowScoreAudio.play();
                 rowOfThree.forEach(item => {
@@ -263,9 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
-
-    // loopRowsOfThree();
-
+    
     //check matches of 3 column-wise (last possible vertical 3-squares-match is squares 48/55/63)
     function loopColsOfThree() {
         for (i = 0; i < 48; i++) {
@@ -282,35 +226,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // loopColsOfThree();
-
-
+    
     ////// starting and timing game //////
-
+    
+    
+    //first scramble & avoiding starting with points
+    function firstScramble() {
+        for (j = 0; j < 64; j++) {
+            let randomImage = Math.floor(Math.random() * fruitIcons.length);
+            squares[j].style.backgroundImage = fruitIcons[randomImage];
+        }
+        
+        let count = 0;
+        while (count < 10) {
+            loopRowsOfThree();
+            loopColsOfThree();
+            flowDownFilledSquares();
+            count++;
+        }
+        scoreDisplay.innerHTML = score = 0; 
+    }   
+    
     startBtn.onclick = function () {
-        startAudio.play(); 
-        //run 1 time to hav no 3,4,5-rows at start. 
-        loopRowsOfFive();
-        loopColsOfFive();
-        loopRowsOfFour();
-        loopColsOfFour();
-        loopRowsOfThree();
-        loopColsOfThree();
-        flowDownFilledSquares();
-        // set score to zero after first points are given. 
-        scoreDisplay.innerHTML = score = 0; //starts at 0 points when click start!
+        startAudio.play();
+        firstScramble();
         playTime()
-
     };
 
-    //starting bar progress, and timer; when bar width is full (100), 
-    //clear both bar interval and gamePlay function (which runs the game) 
+    //starting bar progress and game timer 
     function playTime() {
-        //timing the bar
         const progress = document.getElementById("gameBar");
         let barId = setInterval(frame, 200);
         let timerId = setInterval(gamePlay, 50);
-
         let width = 0;
         function frame() {
             if (width == 100) {
@@ -321,19 +268,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        //timig the game, stops slight before bar reach end
         function gamePlay() {
             if (width == 99) {
                 clearInterval(timerId);
-                //this is just optional ending animation etc: 
+                
+                //optional game-finished-animation 
                 squares.forEach(item => item.style.backgroundColor = '#91e92d');
                 squares.forEach(item => item.style.backgroundImage = '');
                 document.getElementById("grid-shake").classList.add("gridShaking", "gridBack");
                 document.getElementById("board-increase").classList.add("board-increase");
-                finishAudio.play();               
-                //refreshing the page: document.location.href = ''; after 5 sec. 
-                setTimeout(function(){ document.location.href = ''; }, 5000);
-            } else {
+                finishAudio.play();
+                
+                //refreshing the page after few seconds 
+                setTimeout(function () { document.location.href = ''; }, 5000);
+                
+            //else game is still active
+            } else { 
                 loopRowsOfFive();
                 loopColsOfFive();
                 loopRowsOfFour();
@@ -345,8 +295,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-
 });
+
+
+
 
 
 
