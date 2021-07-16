@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //starting bar progress and game timer 
     function playTime() {
         const progress = document.getElementById("gameBar");
-        let barId = setInterval(frame, 600);
+        let barId = setInterval(frame, 1200);
         let timerId = setInterval(gamePlay, 50);
         let width = 0;
         function frame() {
