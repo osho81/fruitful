@@ -10,4 +10,4 @@ Since each move costs points, strategy is needed for highest possible points wit
 Made by vanilla javascript - no library or framework used for mobile-friendly design. 
 Purpose was to strengthen javascript skills. 
 
-Basic boilerplate is from https://github.com/kubowania/candy-crush 
+Starting basic boilerplate is from https://github.com/kubowania/candy-crush 
