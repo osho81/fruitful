@@ -63,12 +63,7 @@ h3 {
   margin-top: -5px;
  }
 
-/* .invisible {
-    background-color: white;
-} */
-
 body {
-  /* background-image: url("candy-crush-background-2.png"); */
   max-width: 100vh;
   display: flex;
 }
@@ -81,9 +76,6 @@ body {
   min-width: 200px;
   min-height: 120px;
 
-  /* display: flex;
-  flex-direction: column; */
-  /* justify-content: space-between; */
   align-items: center;
   text-align: center;
   padding-bottom: -30;
@@ -97,7 +89,6 @@ body {
   transition-delay: 0.5s;
   transition-duration: 2s;
 }
-
 
 #gameProgress {
   width: 100%;
