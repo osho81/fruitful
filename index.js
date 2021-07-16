@@ -7,20 +7,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const gridWidth = 8;
     const fruitIcons = [
-        'url(../public/images/strawb.png)',
-        'url(../public/images/pineapple.png)',
-        'url(../public/images/orange.png)',
-        'url(../public/images/grapes.png)',
-        'url(../public/images/pear.png)',
-        'url(../public/images/kiwi.png)'
+        'url(public/images/strawb.png)',
+        'url(public/images/pineapple.png)',
+        'url(public/images/orange.png)',
+        'url(public/images/grapes.png)',
+        'url(public/images/pear.png)',
+        'url(public/images/kiwi.png)'
     ];
 
-    var startAudio = new Audio('../public/audio/start.mp3');
-    var lowScoreAudio = new Audio('../public/audio/3found.mp3');
-    var mediumScoreAudio = new Audio('../public/audio/4found.mp3');
-    var highScoreAudio = new Audio('../public/audio/5found.mp3');
-    var finishAudio = new Audio('../public/audio/finish.mp3');
-
+    var startAudio = new Audio('public/audio/start.mp3');
+    var lowScoreAudio = new Audio('public/audio/3found.mp3');
+    var mediumScoreAudio = new Audio('public/audio/4found.mp3');
+    var highScoreAudio = new Audio('public/audio/5found.mp3');
+    var finishAudio = new Audio('public/audio/finish.mp3');
 
     //create board and its squares 
     function board() {
