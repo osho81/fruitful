@@ -154,5 +154,9 @@ body {
   text-align: center;
 }
 
+footer {
+  position: absolute;
+  margin-top: 700px;
+}
 
 
