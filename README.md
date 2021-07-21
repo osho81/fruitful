@@ -7,7 +7,7 @@ c) game time is limite (time elapsed and left is visualized a progressing bar).
 
 Since each move costs points, strategy is needed for highest possible points within the game time. 
 
-Made by vanilla javascript - no library or framework used for mobile-friendly design. 
+Made by vanilla javascript - no library or framework used for mobile-friendly design (yet). 
 Purpose was to strengthen javascript skills. 
 
 Starting basic boilerplate is from https://github.com/kubowania/candy-crush 
