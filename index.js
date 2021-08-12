@@ -248,6 +248,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     startBtn.onclick = function () {
         startAudio.play();
+        document.querySelector('#playButton').style.display = "none"; 
+        
         firstScramble();
         playTime()
     };
