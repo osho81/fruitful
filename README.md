@@ -1,9 +1,9 @@
 # fruitful
 Candy crush like game, with fruits and with slightly different rules:   
 
-a) each move (from one square to another) cost 5 points.   
+a) Each move (from one square to another) cost 5 points.   
 b) 3 fruits in a row gives 3points, 4 in a row gives 12 points, and 5 in a row gives 25 points.    
-c) game time is limite (time elapsed and left is visualized a progressing bar).   
+c) Game time is limited (time elapsed and time left is visualized as a progressing bar).   
 
 Since each move costs points, strategy is needed for highest possible points within the game time. 
 
