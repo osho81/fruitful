@@ -124,6 +124,7 @@ body {
 }
 
 .instructions {
+  opacity: 0.3;
   margin-top: 350px;
   margin-left: -300px;
   margin-bottom: 200px;
@@ -135,6 +136,7 @@ body {
 }
 
 .instructions:hover {
+  opacity: 0.8;
   color: #385f39;
   margin-top: 350px;
   margin-left: -300px;
@@ -148,6 +150,9 @@ body {
 footer {
   position: absolute;
   margin-top: 700px;
+  margin-left: 50px;
 }
 
-
+#footer-credits {
+  font-size: 0.6rem;
+}
