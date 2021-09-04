@@ -7,6 +7,9 @@ c) Game time is limited (time elapsed and time left is visualized as a progressi
 
 Since each move costs points, strategy is needed for highest possible points within the game time. 
 
+
+
+
 Made by vanilla javascript - no library or framework used for mobile-friendly design. 
 
 Purpose: strengthen javascript skills; create a simple fun game with different rules than similar games. 
