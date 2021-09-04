@@ -1,4 +1,4 @@
-# fruitful
+# Fruitful
 Candy crush like game, with fruits and with slightly different rules:   
 
 a) Each move (from one square to another) cost 5 points.   
@@ -7,7 +7,7 @@ c) Game time is limited (time elapsed and time left is visualized as a progressi
 
 Since each move costs points, strategy is needed for highest possible points within the game time. 
 
-![alt text] (https://github.com/osho81/fruitful/blob/612bb00471d5c04104fc7fe11403df83654cc358/fruity.PNG) 
+![alt text] (https://github.com/osho81/fruitful/blob/612bb00471d5c04104fc7fe11403df83654cc358/fruity.PNG?raw=true) 
 
 
 Made by vanilla javascript - no library or framework used for mobile-friendly design. 
