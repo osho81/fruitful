@@ -11,6 +11,6 @@ Since each move costs points, strategy is needed for highest possible points wit
 
 Made by vanilla javascript - no library or framework used for mobile-friendly design. 
 
-Purpose: strengthen javascript skills; create a simple fun game with different rules than similar games. 
+Purpose and motivation: to strengthen javascript skills; create a simple fun game with different rules than similar games. 
 
-Starting basic boilerplate is from https://github.com/kubowania/candy-crush 
+Starting help for the basic parts is from https://github.com/kubowania/candy-crush 
