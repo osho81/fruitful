@@ -13,7 +13,7 @@ Candy crush like game, with fruits and with slightly different rules:
 <img src="https://github.com/osho81/fruitful/blob/main/fruity.PNG" alt="Pic from the game" width="600"/>
 
 ## Tools
-Made by vanilla javascript - no library or framework used for mobile-friendly design. 
+Made by vanilla javascript - no library or framework used for mobile-friendly design yet. 
 
 ## Purpose and motivation
 To strengthen javascript skills; create a simple fun game with different rules than similar games. 
@@ -21,3 +21,7 @@ To strengthen javascript skills; create a simple fun game with different rules t
 ## Main helping source
 Starting help for the basic parts is from https://github.com/kubowania/candy-crush 
 This boilerplate was used for starting of the fundamental logic of the general game rules. 
+
+### Possible future improvements
+- Add mobile friendly design.
+- Persistent scoring design. 
